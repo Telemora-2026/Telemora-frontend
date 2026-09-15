@@ -16,7 +16,8 @@ import {
   Loader2,
   Facebook,
   Twitter,
-  Youtube
+  Youtube,
+  Linkedin
 } from 'lucide-react';
 
 const Pinterest = ({ className }: { className?: string }) => (
@@ -369,6 +370,9 @@ export const ContactSection: React.FC = () => {
                   </a>
                   <a href="https://www.youtube.com/@TelemoraNetworks" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-[#fafdf9] border-2 border-[#cfe3cc] flex items-center justify-center text-[#277822] hover:bg-[#277822] hover:border-[#277822] hover:text-white transition-all shadow-sm hover:-translate-y-1">
                     <Youtube className="w-5 h-5" />
+                  </a>
+                  <a href="https://www.linkedin.com/company/telemora" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-[#fafdf9] border-2 border-[#cfe3cc] flex items-center justify-center text-[#277822] hover:bg-[#277822] hover:border-[#277822] hover:text-white transition-all shadow-sm hover:-translate-y-1">
+                    <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
               </div>
