@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Activity, 
   ArrowRight, 
@@ -100,22 +101,22 @@ export const Hero: React.FC<HeroProps> = ({
               Telemora connects machine and sensor data with asset and maintenance context, helping engineering teams spot deviations, investigate anomalies, and know where to look next.
             </p>
 
-            {/* Action CTAs */}
+            {/* Action CTAs: Main Hero button points directly to /product */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={onExploreClick}
+              <Link
+                to="/product"
                 className="px-7 py-4 rounded-xl bg-[#277822] hover:bg-[#1e6019] text-white font-mono font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#277822]/25 border border-[#236d1f] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer flex items-center gap-2.5"
               >
-                <span>Explore Operations Dashboard</span>
+                <span>Explore Telorix AI Platform</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
 
               <button
-                onClick={onOpenDemoModal}
+                onClick={onExploreClick}
                 className="px-6 py-4 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-mono font-bold text-xs uppercase tracking-wider border border-slate-300 shadow-sm transition-all hover:border-slate-400 cursor-pointer flex items-center gap-2"
               >
-                <FileText className="w-4 h-4 text-[#277822]" />
-                <span>Request Pilot Review</span>
+                <Activity className="w-4 h-4 text-[#277822]" />
+                <span>Live Operations View</span>
               </button>
             </div>
 

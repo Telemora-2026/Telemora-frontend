@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Activity, 
   Menu, 
@@ -13,6 +13,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState('about');
@@ -24,6 +25,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
     { name: 'Use Cases', href: '#use-cases', id: 'use-cases' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
+
+  const getHref = (hash: string) => {
+    return location.pathname === '/' ? hash : `/${hash}`;
+  };
 
   // Scroll handler for background blur and ScrollSpy active section detection
   useEffect(() => {
@@ -72,11 +77,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
           {/* 5 Core Navigation Links with Dynamic ScrollSpy Active Highlighting */}
           <nav className="hidden md:flex items-center gap-1.5 bg-[#f4faf2] p-1.5 rounded-full border border-[#cfe3cc]/80 font-mono text-xs">
             {navLinks.map((link) => {
-              const isActive = currentSection === link.id;
+              const isActive = location.pathname === '/' && currentSection === link.id;
               return (
                 <a
                   key={link.name}
-                  href={link.href}
+                  href={getHref(link.href)}
                   className={`px-4 py-1.5 rounded-full font-bold transition-all duration-300 ${
                     isActive
                       ? 'bg-[#277822] text-white shadow-sm scale-105'
@@ -93,7 +98,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
           <div className="hidden sm:flex items-center gap-3">
             <Link
               to="/product"
-              className="px-5 py-2 rounded-full bg-[#277822] hover:bg-[#1e6019] text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md shadow-[#277822]/25 border border-[#34d399]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5"
+              className={`px-5 py-2 rounded-full text-white text-xs font-mono font-bold uppercase tracking-wider shadow-md border transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5 ${
+                location.pathname === '/product'
+                  ? 'bg-[#1e6019] border-[#34d399] ring-2 ring-[#277822]/30 shadow-[#277822]/35'
+                  : 'bg-[#277822] hover:bg-[#1e6019] border-[#34d399]/30 shadow-[#277822]/25'
+              }`}
             >
               <span>Telorix</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -118,11 +127,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
         <div className="md:hidden mt-2 max-w-6xl mx-auto rounded-3xl bg-white border-2 border-[#cfe3cc] p-4 space-y-2 shadow-2xl animate-fade-in font-mono">
           <div className="grid grid-cols-1 gap-1">
             {navLinks.map((link) => {
-              const isActive = currentSection === link.id;
+              const isActive = location.pathname === '/' && currentSection === link.id;
               return (
                 <a
                   key={link.name}
-                  href={link.href}
+                  href={getHref(link.href)}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-2.5 text-xs font-bold rounded-xl transition-colors flex items-center justify-between ${
                     isActive 
